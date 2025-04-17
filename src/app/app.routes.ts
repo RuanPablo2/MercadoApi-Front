@@ -6,8 +6,7 @@ import { AdminGuard } from './core/guards/admin.guard';
 
 // Páginas públicas
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { AuthComponent } from './pages/auth/auth.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
@@ -28,8 +27,9 @@ import { AdminOrderDetailsComponent } from './pages/admin/order-details/order-de
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
+  { path: 'register', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
