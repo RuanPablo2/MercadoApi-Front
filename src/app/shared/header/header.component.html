@@ -1,1 +1,30 @@
-<p>header works!</p>
+<!-- Header simples -->
+<header class="header-simple" *ngIf="showSimpleHeader">
+  <div class="container center">
+    <div class="logo">
+      <a routerLink="/">🌟 Mercado Energia Positiva</a>
+    </div>
+  </div>
+</header>
+
+<!-- Header completo -->
+<header class="header" *ngIf="!showSimpleHeader">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">🌟 Mercado Energia Positiva</a>
+    </div>
+
+    <nav class="nav">
+      <a routerLink="/">Início</a>
+      <a routerLink="/products">Produtos</a>
+      <a routerLink="/orders" *ngIf="isAuthenticated">Meus Pedidos</a>
+      <a routerLink="/admin/dashboard" *ngIf="isAdmin">Admin</a>
+    </nav>
+
+    <div class="actions">
+      <a routerLink="/cart" class="cart-btn" title="Carrinho">🛒</a>
+      <a routerLink="/auth" class="login-btn" *ngIf="!isAuthenticated">Entrar</a>
+      <button *ngIf="isAuthenticated" (click)="logout()">Sair</button>
+    </div>
+  </div>
+</header>

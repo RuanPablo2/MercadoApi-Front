@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-orders',
+  standalone: true,
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
@@ -10,5 +14,7 @@ export class OrdersComponent {
     { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' },
     { id: 12344, total: 159.9, date: '14 Jan 2025', status: 'PAID' },
     { id: 12343, total: 459.9, date: '13 Jan 2025', status: 'OUT_FOR_DELIVERY' },
+    { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' },
+    { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' }
   ];
 }

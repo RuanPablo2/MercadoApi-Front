@@ -1,1 +1,31 @@
-<p>home works!</p>
+<section class="carousel">
+  <div class="slides">
+    <div class="slide">🔆 Oferta da Semana</div>
+    <div class="slide instagram-tab">
+      <p>Siga nosso Instagram! 📸 mercado.energia</p>
+    </div>
+  </div>
+</section>
+
+<section class="branches">
+  <h2>🏪 Nossas Unidades</h2>
+  <div class="branches-list">
+    <div class="branch-card">Unidade Centro</div>
+    <div class="branch-card">Unidade Norte</div>
+    <div class="branch-card">Unidade Sul</div>
+  </div>
+</section>
+
+<section class="featured-products">
+  <h2>🛍️ Produtos em Destaque</h2>
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let product of featuredProducts">
+      <img [src]="product.image" alt="{{ product.name }}" />
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.price | currency:'BRL' }}</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button routerLink="/produtos" class="see-more">Ver todos os produtos</button>
+  </div>
+</section>

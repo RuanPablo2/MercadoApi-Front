@@ -1,0 +1,25 @@
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+
+  .footer-info {
+    margin-bottom: 10px;
+  }
+
+  .footer-links {
+    a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
