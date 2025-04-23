@@ -1,1 +1,28 @@
-<p>order-details works!</p>
+<div class="order-details container">
+    <h2>Detalhes do Pedido #{{ order.id }}</h2>
+  
+    <div class="status-tracker">
+      <app-order-status [status]="order.status"></app-order-status>
+    </div>
+  
+    <div class="order-items">
+      <h3>Itens do Pedido</h3>
+      <div *ngFor="let item of order.items" class="item-card">
+        <img [src]="item.product.image" alt="Produto">
+        <div>
+          <strong>{{ item.product.name }}</strong><br />
+          Quantidade: {{ item.quantity }}
+        </div>
+        <span class="price">R$ {{ item.totalPrice | number:'1.2-2' }}</span>
+      </div>
+    </div>
+  
+    <div class="order-summary">
+      <h3>Resumo do Pedido</h3>
+      <p>Subtotal: R$ {{ order.subtotal | number:'1.2-2' }}</p>
+      <p>Frete: R$ {{ order.shippingCost | number:'1.2-2' }}</p>
+      <h4>Total: R$ {{ order.total | number:'1.2-2' }}</h4>
+      <button class="btn primary" (click)="trackOrder()">📦 Rastrear Pedido</button>
+      <button class="btn outline" *ngIf="canCancel" (click)="cancelOrder()">✖ Cancelar Pedido</button>
+    </div>
+  </div>

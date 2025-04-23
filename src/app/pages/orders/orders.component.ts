@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule],
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
