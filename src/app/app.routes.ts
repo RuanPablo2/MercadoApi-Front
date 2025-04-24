@@ -54,5 +54,8 @@ export const routes: Routes = [
     ]
   },
 
+  // Auth
+  { path: 'checkout/:id', component: CheckoutComponent, canActivate: [AuthGuard] },
+
   { path: '**', redirectTo: '' } // fallback
 ];

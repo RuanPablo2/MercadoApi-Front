@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
-import { CartResponse, CartItem } from 'src/app/dto/response/cart-response';
+import { CartService } from '../../services/cart.service';
+import { CartResponse, CartItem } from '../../dto/response/cart-response';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  imports: [CommonModule]
 })
 export class CartComponent implements OnInit {
   cart!: CartResponse;

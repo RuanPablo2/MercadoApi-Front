@@ -1,0 +1,14 @@
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+
+  &.cart { background: #eee; color: #666; }
+  &.pending { background: #fff3cd; color: #856404; }
+  &.paid { background: #d4edda; color: #155724; }
+  &.processing { background: #cce5ff; color: #004085; }
+  &.out_for_delivery { background: #f0f0f0; color: #007bff; }
+  &.completed { background: #d1ecf1; color: #0c5460; }
+}

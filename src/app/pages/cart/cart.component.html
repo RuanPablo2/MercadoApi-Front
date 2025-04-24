@@ -3,24 +3,21 @@
   
     <div class="cart-items">
       <div *ngFor="let item of cart.items" class="cart-item">
-        <img [src]="item.product.image" />
+        <img [src]="item.product.imageUrl" />
         <div>
           <strong>{{ item.product.name }}</strong><br />
-          SKU: {{ item.product.sku }}
         </div>
         <div class="quantity-control">
           <button (click)="decreaseQty(item)">-</button>
           <span>{{ item.quantity }}</span>
           <button (click)="increaseQty(item)">+</button>
         </div>
-        <span class="price">R$ {{ item.totalPrice | number:'1.2-2' }}</span>
+        <span class="price">R$ {{ item.subtotal | number:'1.2-2' }}</span>
         <button (click)="removeItem(item)" class="remove">🗑</button>
       </div>
     </div>
   
     <div class="cart-summary">
-      <p>Subtotal: R$ {{ cart.subtotal | number:'1.2-2' }}</p>
-      <p>Frete: R$ {{ cart.shipping | number:'1.2-2' }}</p>
       <h4>Total: R$ {{ cart.total | number:'1.2-2' }}</h4>
       <button class="btn primary" (click)="goToCheckout()">🛍️ Finalizar Compra</button>
     </div>

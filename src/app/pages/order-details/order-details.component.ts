@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrderService } from 'src/app/services/order.service';
-import { OrderResponse } from 'src/app/dto/response/order-response';
+import { OrderService } from '../../services/order.service';
+import { OrderResponse } from '../../dto/response/order-response';
+import { CommonModule } from '@angular/common';
+import { OrderStatusComponent } from '../../shared/order-status/order-status.component'
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.scss']
+  styleUrls: ['./order-details.component.scss'],
+  imports: [CommonModule, OrderStatusComponent]
 })
 export class OrderDetailsComponent implements OnInit {
   order!: OrderResponse;
