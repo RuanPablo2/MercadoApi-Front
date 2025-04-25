@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OrderService } from '../../services/order.service';
+import { OrderResponse } from '../../dto/response/order-response';
 
 @Component({
   selector: 'app-orders',
@@ -8,12 +10,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent {
-  orders = [
-    { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' },
-    { id: 12344, total: 159.9, date: '14 Jan 2025', status: 'PAID' },
-    { id: 12343, total: 459.9, date: '13 Jan 2025', status: 'OUT_FOR_DELIVERY' },
-    { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' },
-    { id: 12345, total: 259.9, date: '15 Jan 2025', status: 'PENDING' }
-  ];
+export class OrdersComponent implements OnInit {
+  orders: OrderResponse[] = [];
+
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    this.orderService.getAllOrders().subscribe({
+      next: (data) => (this.orders = data),
+      error: (err) => console.error('Erro ao buscar pedidos', err)
+    });
+  }
 }

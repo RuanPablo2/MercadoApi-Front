@@ -1,22 +1,28 @@
 <div class="orders-page">
-    <header>
-      <h2>Meus Pedidos</h2>
-      <div class="avatar">
-        <img src="assets/avatar.svg" alt="Perfil" />
+  <header>
+    <h2>Meus Pedidos</h2>
+    <div class="avatar">
+      <img src="assets/avatar.svg" alt="Perfil" />
+    </div>
+  </header>
+
+  <div class="order-list" *ngIf="orders.length > 0; else noOrders">
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="info">
+        <strong>Pedido #{{ order.id }}</strong>
+        <span>Total: R$ {{ order.total | number:'1.2-2' }}</span>
+        <small>{{ order.createdAt | date: 'dd MMM yyyy - HH:mm' }}</small>
       </div>
-    </header>
-  
-    <div class="order-list">
-      <div class="order-card" *ngFor="let order of orders">
-        <div class="info">
-          <strong>Pedido #{{ order.id }}</strong>
-          <span>R$ {{ order.total }}</span>
-          <small>{{ order.date }}</small>
-        </div>
-        <div class="status">
-          <span class="badge {{ order.status }}">{{ order.status }}</span>
-          <button>Ver Detalhes</button>
-        </div>
+      <div class="status">
+        <span class="badge {{ order.status || order.currentStatus }}">
+          {{ order.status || order.currentStatus }}
+        </span>
+        <button>Ver Detalhes</button>
       </div>
     </div>
   </div>
+
+  <ng-template #noOrders>
+    <p>Nenhum pedido encontrado 😕</p>
+  </ng-template>
+</div>

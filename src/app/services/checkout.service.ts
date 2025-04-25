@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CheckoutService {
-  private apiUrl = '${environment.apiUrl}/api/orders';
+  private apiUrl = '${environment.apiUrl}/orders';
 
   constructor(private http: HttpClient) {}
 
   getCheckoutInfo(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/cart`);
+    return this.http.get<any>(`${this.apiUrl}/cart`, { withCredentials: true });
   }
 
   completeOrder(payload: any): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${payload.orderId}/checkout`, payload);
+    return this.http.put<void>(`${this.apiUrl}/${payload.orderId}/checkout`, payload, { withCredentials: true });
   }
 }

@@ -16,20 +16,21 @@ export interface OrderItem {
   }
   
   export interface OrderResponse {
-    id: string;
-    trackingCode: string;
-    status: string;
+    id: number;
+    trackingCode: string | null;
+    status?: string;
+    currentStatus?: string;
     createdAt: string;
     total: number;
-    items: OrderItem[];
-    statusHistory: OrderStatusHistory[];
-    deliveryAddress: {
-      street: string;
-      number: string;
-      complement?: string;
-      neighborhood: string;
-      city: string;
-      state: string;
-      postalCode: string;
-    };
-  }
+    items: {
+      productId: number;
+      quantity: number;
+      productName: string;
+      unitPrice: number;
+      total: number;
+    }[];
+    statusHistory?: {
+      status: string;
+      changedAt: string;
+    }[];
+  }  

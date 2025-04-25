@@ -24,7 +24,7 @@ export class OrderDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.orderService.getOrderById(id).subscribe((data) => {
       this.order = data;
-      this.canCancel = ['CART', 'PENDING', 'PROCESSING'].includes(this.order.status);
+      this.canCancel = ['CART', 'PENDING', 'PROCESSING'].includes(this.order.status ?? '');
     });
   }
 
@@ -33,7 +33,7 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   cancelOrder() {
-    this.orderService.cancelOrder(this.order.id).subscribe(() => {
+    this.orderService.cancelOrder(this.order.id.toString()).subscribe(() => {
       this.order.status = 'CANCELLED';
       this.canCancel = false;
     });
