@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,23 +17,24 @@ export class HeaderComponent {
   isAdmin = false;
   showSimpleHeader = false;
 
-  constructor(private router: Router) {
-    this.updateAuthStatus();
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-    // só escuta quando a navegação termina
+  constructor() {
+    this.authService.currentUser$.subscribe(user => {
+      this.isAuthenticated = !!user;
+      this.isAdmin = user?.role === 'ADMIN';
+    });
+
+    // escuta mudanças de rota
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.showSimpleHeader = this.checkIfSimpleHeader(event.urlAfterRedirects);
     });
 
-    // também verifica na carga inicial
+    // inicial
     this.showSimpleHeader = this.checkIfSimpleHeader(this.router.url);
-  }
-
-  updateAuthStatus() {
-    this.isAuthenticated = !!localStorage.getItem('token');
-    this.isAdmin = localStorage.getItem('role') === 'ADMIN';
   }
 
   checkIfSimpleHeader(url: string): boolean {
@@ -40,7 +42,6 @@ export class HeaderComponent {
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 }

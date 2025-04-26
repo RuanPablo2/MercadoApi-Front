@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,11 @@ import { HeaderComponent } from './shared/header/header.component';
   styleUrl: './app.component.scss',
   standalone: true
 })
-export class AppComponent {
-  title = 'MercadoAPI-Front';
+export class AppComponent implements OnInit {
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.loadUser();
+  }
 }

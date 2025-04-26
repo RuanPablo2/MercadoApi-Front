@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,8 +16,14 @@ export class AuthComponent {
 
   loginForm: FormGroup;
   registerForm: FormGroup;
+  redirectUrl: string = '/';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -36,6 +42,12 @@ export class AuthComponent {
         zipCode: [''],
       })
     });
+
+    this.route.queryParams.subscribe(params => {
+      if (params['redirect']) {
+        this.redirectUrl = params['redirect'];
+      }
+    });
   }
 
   switchTab(tab: 'login' | 'register') {
@@ -46,9 +58,8 @@ export class AuthComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
-        next: (res) => {
-          this.authService.setToken(res.token);
-          this.router.navigate(['/']);
+        next: () => {
+          this.router.navigateByUrl(this.redirectUrl);
         },
         error: (err) => {
           console.error('Erro ao logar:', err);
