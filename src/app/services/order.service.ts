@@ -22,7 +22,7 @@ export class OrderService {
       .pipe(map(response => response.content));
   }
 
-  cancelOrder(id: string): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}/cancel`, {}, { withCredentials: true });
+  cancelOrder(id: string): Observable<OrderResponse> {
+    return this.http.put<OrderResponse>(`${this.apiUrl}/${id}/cancel`, {}, { withCredentials: true });
   }
 }

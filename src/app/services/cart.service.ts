@@ -16,14 +16,23 @@ export class CartService {
     return this.http.post<CartResponse>(this.apiUrl, {}, { withCredentials: true });
   }
 
-  updateItemQuantity(productId: string, quantity: number): Observable<CartResponse> {
-    return this.http.post<CartResponse>(`${this.apiUrl}/cart/items`, {
-      productId,
-      quantity
-    }, { withCredentials: true });
+  addItemToCart(orderId: string, itemRequest: { productId: string; quantity: number }): Observable<CartResponse> {
+    return this.http.post<CartResponse>(`${this.apiUrl}/${orderId}/items`, itemRequest, { withCredentials: true });
   }
 
-  removeItem(productId: string): Observable<CartResponse> {
-    return this.http.delete<CartResponse>(`${this.apiUrl}/cart/items/${productId}`, { withCredentials: true });
+  decreaseItemQuantity(orderId: string, itemId: string, quantity: number): Observable<CartResponse> {
+    return this.http.patch<CartResponse>(
+      `${this.apiUrl}/${orderId}/items/${itemId}/decrease?quantity=${quantity}`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  removeItem(orderId: string, itemId: string): Observable<CartResponse> {
+    return this.http.delete<CartResponse>(`${this.apiUrl}/${orderId}/items/${itemId}`, { withCredentials: true });
+  }
+
+  checkout(orderId: string): Observable<CartResponse> {
+    return this.http.put<CartResponse>(`${this.apiUrl}/${orderId}/checkout`, {}, { withCredentials: true });
   }
 }

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
+  standalone: true,
   imports: [CommonModule]
 })
 export class CartComponent implements OnInit {
@@ -16,27 +17,45 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
-    this.cartService.getCart().subscribe(data => this.cart = data);
+    this.loadCart();
   }
 
-  increaseQty(item: CartItem) {
-    this.cartService.updateItemQuantity(item.product.id, item.quantity + 1)
-      .subscribe(data => this.cart = data);
+  loadCart(): void {
+    this.cartService.getCart().subscribe((data: CartResponse) => {
+      this.cart = data;
+    });
   }
 
-  decreaseQty(item: CartItem) {
-    if (item.quantity > 1) {
-      this.cartService.updateItemQuantity(item.product.id, item.quantity - 1)
-        .subscribe(data => this.cart = data);
-    }
+  increaseQty(item: CartItem): void {
+    if (!this.cart) return;
+
+    this.cartService.addItemToCart(this.cart.id, {
+      productId: item.product.id,
+      quantity: 1
+    }).subscribe((data: CartResponse) => {
+      this.cart = data;
+    });
   }
 
-  removeItem(item: CartItem) {
-    this.cartService.removeItem(item.product.id)
-      .subscribe(data => this.cart = data);
+  decreaseQty(item: CartItem): void {
+    if (!this.cart || item.quantity <= 1) return;
+
+    this.cartService.decreaseItemQuantity(this.cart.id, item.product.id, 1)
+      .subscribe((data: CartResponse) => {
+        this.cart = data;
+      });
   }
 
-  goToCheckout() {
+  removeItem(item: CartItem): void {
+    if (!this.cart) return;
+
+    this.cartService.removeItem(this.cart.id, item.product.id)
+      .subscribe((data: CartResponse) => {
+        this.cart = data;
+      });
+  }
+
+  goToCheckout(): void {
     this.router.navigate(['/checkout']);
   }
 }
