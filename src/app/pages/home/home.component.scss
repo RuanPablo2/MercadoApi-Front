@@ -1,74 +1,79 @@
 .carousel {
-    background: linear-gradient(45deg, #5a189a, #f4c430);
-    color: white;
-    padding: 2rem;
-    text-align: center;
-  
-    .slide {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+  background: linear-gradient(45deg, #5a189a, #f4c430);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+
+  .slide {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .instagram-tab {
+    background-color: #fff;
+    color: #5a189a;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+}
+
+.branches {
+  padding: 2rem;
+  text-align: center;
+
+  .branches-list {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .branch-card {
+      background-color: #eee;
+      padding: 1rem 2rem;
+      border-radius: 8px;
     }
-  
-    .instagram-tab {
-      background-color: #fff;
-      color: #5a189a;
+  }
+}
+
+.featured-products {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+
+    .product-card {
+      background: white;
       padding: 1rem;
-      border-radius: 10px;
-    }
-  }
-  
-  .branches {
-    padding: 2rem;
-    text-align: center;
-  
-    .branches-list {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-  
-      .branch-card {
-        background-color: #eee;
-        padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      img {
+        width: 100%;
+        max-height: 120px;
+        object-fit: contain;
         border-radius: 8px;
+        margin-bottom: 0.5rem;
+        display: block;
+        margin-inline: auto;
       }
     }
-  }
-  
-  .featured-products {
-    padding: 2rem;
-    background-color: #f9f9f9;
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-  
-      .product-card {
-        background: white;
-        padding: 1rem;
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  
-        img {
-          width: 100%;
-          max-height: 120px;
-          object-fit: contain;
-          border-radius: 8px;
-          margin-bottom: 0.5rem;
-          display: block;
-          margin-inline: auto;
-        }
-      }
-    }
-  
+
     .actions {
       margin-top: 1.5rem;
-  
+
       .see-more {
         background-color: #5a189a;
         color: white;
@@ -76,10 +81,16 @@
         border: none;
         border-radius: 8px;
         cursor: pointer;
-  
+
         &:hover {
           background-color: #7b2cbf;
         }
       }
     }
   }
+}
+
+.snackbar-error {
+  background-color: #f44336;
+  color: #fff;
+}
