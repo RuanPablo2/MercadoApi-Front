@@ -40,22 +40,14 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(product: ProductResponse): void {
-    const savedOrderId = localStorage.getItem('cartOrderId');
-
-    if (savedOrderId) {
-      this.sendItem(savedOrderId, product);
-    } else {
-      this.cartService.getCart().subscribe({
-        next: (cart) => {
-          const orderId = cart.id;
-          localStorage.setItem('cartOrderId', orderId);
-          this.sendItem(orderId, product);
-        },
-        error: () => {
-          this.snackBar.open('Erro ao iniciar o carrinho', 'Fechar', { duration: 3000, panelClass: ['snackbar-error'] });
-        }
-      });
-    }
+    this.cartService.getCart().subscribe({
+      next: (cart) => {
+        this.sendItem(cart.id, product);
+      },
+      error: () => {
+        this.snackBar.open('Erro ao obter o carrinho', 'Fechar', { duration: 3000, panelClass: ['snackbar-error'] });
+      }
+    });
   }
 
   private sendItem(orderId: string, product: ProductResponse): void {

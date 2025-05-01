@@ -1,77 +1,85 @@
 .orders-page {
-    padding: 2rem;
-  
-    header {
+  padding: 2rem;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      color: #1a1a2e;
+    }
+
+    .avatar img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+
+  .order-list {
+    margin-top: 2rem;
+
+    .order-card {
+      background: #f4fffa;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-  
-      h2 {
-        color: #1a1a2e;
-      }
-  
-      .avatar img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-      }
-    }
-  
-    .order-list {
-      margin-top: 2rem;
-  
-      .order-card {
-        background: #f4fffa;
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 1rem;
+
+      .info {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-  
-        .info {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+
+        .badge {
+          padding: 0.25rem 0.5rem;
+          border-radius: 12px;
+          font-size: 0.75rem;
+          font-weight: bold;
+          color: #000;
+
+          &.PENDING {
+            background: #ffcd00;
+            color: #000;
+          }
+
+          &.PAID {
+            background: #6a0dad;
+          }
+
+          &.OUT_FOR_DELIVERY {
+            background: #007bff;
+          }
+
+          &.CANCELED {
+            background: red;
+          }
+
+          &.CART {
+            background: gray;
+          }
         }
-  
-        .status {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 0.5rem;
-  
-          .badge {
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: white;
-  
-            &.PENDING {
-              background: #ffcd00;
-              color: #000;
-            }
-  
-            &.PAID {
-              background: #6a0dad;
-            }
-  
-            &.OUT_FOR_DELIVERY {
-              background: #007bff;
-            }
-          }
-  
-          button {
-            background: none;
-            border: 1px solid #6a0dad;
-            color: #6a0dad;
-            padding: 0.25rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            cursor: pointer;
-          }
+
+        button {
+          background: none;
+          border: 1px solid #6a0dad;
+          color: #6a0dad;
+          padding: 0.25rem 0.75rem;
+          border-radius: 8px;
+          font-size: 0.8rem;
+          cursor: pointer;
         }
       }
     }
   }
+}

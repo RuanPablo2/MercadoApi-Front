@@ -18,7 +18,7 @@ export interface OrderItem {
   export interface OrderResponse {
     id: number;
     trackingCode: string | null;
-    status?: string;
+    status: string;
     currentStatus?: string;
     createdAt: string;
     total: number;
@@ -33,4 +33,4 @@ export interface OrderItem {
       status: string;
       changedAt: string;
     }[];
-  }  
+  } 
