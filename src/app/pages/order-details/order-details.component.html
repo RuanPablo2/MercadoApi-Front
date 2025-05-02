@@ -2,7 +2,7 @@
     <h2>Detalhes do Pedido #{{ order.id }}</h2>
   
     <div class="status-tracker">
-      <app-order-status [status]="order.status ?? ''"></app-order-status>
+      <app-order-status [status]="order.status"></app-order-status>
     </div>
   
     <div class="order-items">

@@ -17,7 +17,7 @@
         <span class="badge {{ order.status || order.currentStatus }}">
           {{ order.status || order.currentStatus }}
         </span>
-        <button>Ver Detalhes</button>
+        <button (click)="goToDetails(order.id)">Ver Detalhes</button>
       </div>
     </div>
   </div>
