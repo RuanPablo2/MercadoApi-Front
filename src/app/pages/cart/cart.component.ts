@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
     if (!this.cart) return;
 
     this.cartService.addItemToCart(this.cart.id, {
-      productId: item.product.id,
+      productId: item.productId,
       quantity: 1
     }).subscribe((data: CartResponse) => {
       this.cart = data;
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
   decreaseQty(item: CartItem): void {
     if (!this.cart || item.quantity <= 1) return;
 
-    this.cartService.decreaseItemQuantity(this.cart.id, item.product.id, 1)
+    this.cartService.decreaseItemQuantity(this.cart.id.toString(), item.productId, 1)
       .subscribe((data: CartResponse) => {
         this.cart = data;
       });
@@ -49,7 +49,7 @@ export class CartComponent implements OnInit {
   removeItem(item: CartItem): void {
     if (!this.cart) return;
 
-    this.cartService.removeItem(this.cart.id, item.product.id)
+    this.cartService.removeItem(this.cart.id, item.productId)
       .subscribe((data: CartResponse) => {
         this.cart = data;
       });
