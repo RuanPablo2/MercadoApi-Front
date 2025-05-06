@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
   decreaseQty(item: CartItem): void {
     if (!this.cart || item.quantity <= 1) return;
 
-    this.cartService.decreaseItemQuantity(this.cart.id.toString(), item.productId, 1)
+    this.cartService.decreaseItemQuantity(this.cart.id, item.productId, 1)
       .subscribe((data: CartResponse) => {
         this.cart = data;
       });

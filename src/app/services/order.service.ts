@@ -13,7 +13,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  getOrderById(id: string): Observable<OrderResponse> {
+  getOrderById(id: number): Observable<OrderResponse> {
     return this.http.get<OrderResponse>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
@@ -22,7 +22,7 @@ export class OrderService {
       .pipe(map(response => response.content));
   }
 
-  cancelOrder(id: string): Observable<OrderResponse> {
+  cancelOrder(id: number): Observable<OrderResponse> {
     return this.http.put<OrderResponse>(`${this.apiUrl}/${id}/cancel`, {}, { withCredentials: true });
   }
 }

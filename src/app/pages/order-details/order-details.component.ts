@@ -27,7 +27,7 @@ export class OrderDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id')!;
+    const id = Number(this.route.snapshot.paramMap.get('id')!);
     this.orderService.getOrderById(id).subscribe((data) => {
       this.order = data;
 
@@ -45,7 +45,7 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   cancelOrder() {
-    this.orderService.cancelOrder(this.order.id.toString()).subscribe(() => {
+    this.orderService.cancelOrder(this.order.id).subscribe(() => {
       this.order.status = 'CANCELLED';
       this.isCancelled = true;
       this.canCancel = false;

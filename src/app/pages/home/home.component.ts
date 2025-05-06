@@ -50,9 +50,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private sendItem(orderId: string, product: ProductResponse): void {
+  private sendItem(orderId: number, product: ProductResponse): void {
     this.cartService.addItemToCart(orderId, {
-      productId: product.id.toString(),
+      productId: product.id,
       quantity: 1
     }).subscribe({
       next: () => {
