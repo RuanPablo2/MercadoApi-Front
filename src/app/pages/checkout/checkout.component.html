@@ -1,39 +1,61 @@
-<div class="checkout container">
-    <h2>Finalizar Compra</h2>
-  
-    <div class="checkout-grid">
-      <div class="left">
-        <section class="box">
-          <h3>Resumo do Pedido</h3>
-          <div *ngFor="let item of order.items">
-            <strong>{{ item.product.name }}</strong><br />
-            Quantidade: {{ item.quantity }} - R$ {{ item.totalPrice | number:'1.2-2' }}
-          </div>
-        </section>
-  
-        <section class="box">
-          <h3>Endereço de Entrega</h3>
-          <form [formGroup]="addressForm">
-            <input formControlName="fullName" placeholder="Nome Completo" />
-            <input formControlName="cep" placeholder="CEP" />
-            <input formControlName="number" placeholder="Número" />
-            <input formControlName="address" placeholder="Endereço" />
-          </form>
-        </section>
-  
-        <section class="box">
-          <h3>Método de Pagamento</h3>
-          <label><input type="radio" formControlName="paymentMethod" value="CREDIT_CARD" /> Cartão de Crédito</label>
-          <label><input type="radio" formControlName="paymentMethod" value="PIX" /> PIX</label>
-        </section>
-      </div>
-  
-      <div class="right box">
-        <h3>Total do Pedido</h3>
-        <p>Subtotal: R$ {{ order.subtotal | number:'1.2-2' }}</p>
-        <p>Frete: R$ {{ order.shippingCost | number:'1.2-2' }}</p>
-        <h4>Total: R$ {{ order.total | number:'1.2-2' }}</h4>
-        <button class="btn primary" (click)="submitOrder()">Pagar Agora</button>
-      </div>
+<div class="checkout container" *ngIf="order">
+  <h2>Finalizar Compra</h2>
+
+  <form
+    [formGroup]="addressForm"
+    (ngSubmit)="submitOrder()"
+    class="checkout-grid"
+  >
+    <!-- Coluna da Esquerda -->
+    <div class="left">
+      <section class="box">
+        <h3>Resumo do Pedido</h3>
+        <div *ngFor="let item of order.items">
+          <strong>{{ item.productName }}</strong
+          ><br />
+          Quantidade: {{ item.quantity }} - R$
+          {{ item.total | number : "1.2-2" }}
+        </div>
+      </section>
+
+      <section class="box">
+        <h3>Endereço de Entrega</h3>
+        <input formControlName="fullName" placeholder="Nome Completo" />
+        <input formControlName="cep" placeholder="CEP" />
+        <input formControlName="number" placeholder="Número" />
+        <input formControlName="address" placeholder="Endereço" />
+      </section>
+
+      <section class="box">
+        <h3>Método de Pagamento</h3>
+        <label>
+          <input
+            type="radio"
+            formControlName="paymentMethod"
+            value="CREDIT_CARD"
+          />
+          Cartão de Crédito
+        </label>
+        <label>
+          <input type="radio" formControlName="paymentMethod" value="PIX" />
+          PIX
+        </label>
+      </section>
     </div>
-  </div>
+
+    <!-- Coluna da Direita -->
+    <div class="right box">
+      <h3>Total do Pedido</h3>
+      <p>Subtotal: R$ {{ order.subtotal | number : "1.2-2" }}</p>
+      <p>Frete: R$ {{ order.shippingCost | number : "1.2-2" }}</p>
+      <h4>Total: R$ {{ order.total | number : "1.2-2" }}</h4>
+      <button
+        class="btn primary"
+        type="submit"
+        [disabled]="addressForm.invalid"
+      >
+        Pagar Agora
+      </button>
+    </div>
+  </form>
+</div>

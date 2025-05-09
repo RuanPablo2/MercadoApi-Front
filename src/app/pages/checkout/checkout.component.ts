@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -25,21 +24,24 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.getCheckoutInfo().subscribe(data => this.order = data);
 
     this.addressForm = this.fb.group({
-      fullName: [''],
-      cep: [''],
-      address: [''],
-      number: [''],
-      paymentMethod: ['CREDIT_CARD']
+      fullName: ['', Validators.required],
+      cep: ['', Validators.required],
+      address: ['', Validators.required],
+      number: ['', Validators.required],
+      paymentMethod: ['CREDIT_CARD', Validators.required]
     });
   }
 
   submitOrder() {
+    if (!this.order) return;
+  
     const payload = {
       ...this.addressForm.value,
       orderId: this.order.id
     };
-
+  
     this.checkoutService.completeOrder(payload).subscribe(() => {
+      alert('Pedido finalizado com sucesso!');
       this.router.navigate(['/orders']);
     });
   }
