@@ -1,1 +1,39 @@
-<p>product-details works!</p>
+<div class="product-page container" *ngIf="product">
+  <div class="product-box">
+    <div class="image-section">
+      <img [src]="product.imageUrl" [alt]="product.name" />
+    </div>
+
+    <div class="info-section">
+      <div class="header">
+        <h1>{{ product.name }}</h1>
+        <p class="price">R$ {{ product.price | number : "1.2-2" }}</p>
+      </div>
+
+      <p class="description">
+        {{ product.description }}
+      </p>
+
+      <ul class="features" *ngIf="product.features?.length">
+        <li *ngFor="let feature of product.features">✔ {{ feature }}</li>
+      </ul>
+
+      <div class="quantity-container">
+        <label for="quantity">Quantity:</label>
+        <div class="quantity-box">
+          <button (click)="decreaseQuantity()">−</button>
+          <span>{{ quantity }}</span>
+          <button (click)="increaseQuantity()">+</button>
+        </div>
+      </div>
+
+      <button
+        class="add-to-cart"
+        [disabled]="product.availableQuantity === 0"
+        (click)="addToCart()"
+      >
+        🛒 Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
