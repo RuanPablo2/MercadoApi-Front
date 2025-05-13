@@ -38,32 +38,35 @@ export class ProductDetailsComponent implements OnInit {
 }
 
   increaseQuantity() {
-    if (this.product && this.quantity < this.product.availableQuantity) {
-      this.quantity++;
-    }
-  }
+  this.quantity++;
+}
+
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
+  if (this.quantity > 1) {
+    this.quantity--;
+  }
+}
+
+  addToCart(): void {
+  if (!this.orderId || !this.product) return;
+
+  const item = {
+    productId: this.product.id,
+    quantity: this.quantity
+  };
+
+  this.cartService.addItemToCart(this.orderId, item).subscribe({
+    next: () => {
+      this.snackBar.open('Produto adicionado ao carrinho!', '', { duration: 2000 });
+    },
+    error: (err) => {
+      const msg = err?.error?.message || 'Erro ao adicionar produto ao carrinho';
+      this.snackBar.open(msg, 'Fechar', {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
     }
-  }
-
-  addToCart() {
-    if (!this.orderId || !this.product) return;
-
-    const item = {
-      productId: this.product.id,
-      quantity: this.quantity
-    };
-
-    this.cartService.addItemToCart(this.orderId, item).subscribe({
-      next: () => {
-        this.snackBar.open('Produto adicionado ao carrinho!', '', { duration: 2000 });
-      },
-      error: () => {
-        this.snackBar.open('Erro ao adicionar produto ao carrinho', 'Fechar', { duration: 3000, panelClass: ['snackbar-error'] });
-      }
-    });
-  }
+  });
+}
 }
