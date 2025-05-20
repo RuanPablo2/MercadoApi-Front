@@ -6,4 +6,6 @@ export interface ProductResponse {
     stockQuantity: number;
     category?: string;
     image?: string;
+    available: boolean;
+    lowStock: boolean;
   }

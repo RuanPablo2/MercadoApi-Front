@@ -27,9 +27,19 @@
         </div>
       </div>
 
+      <p class="low-stock-warning" *ngIf="!product.available">
+        ❌ Produto indisponível
+      </p>
+      <p
+        class="low-stock-warning"
+        *ngIf="product.lowStock && product.available"
+      >
+        ⚠️ Estoque baixo!
+      </p>
+
       <button
         class="add-to-cart"
-        [disabled]="product.availableQuantity === 0"
+        [disabled]="!product.available"
         (click)="addToCart()"
       >
         🛒 Add to Cart

@@ -19,14 +19,34 @@
 <section class="featured-products">
   <h2>🛍️ Produtos em Destaque</h2>
   <div class="products-grid">
-    <div *ngFor="let product of products" class="product-card" (click)="goToProductDetail(product.id)">
-  <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-  <h3>{{ product.name }}</h3>
-  <p>Preço: R$ {{ product.price }}</p>
-  <button (click)="addToCart(product); $event.stopPropagation()">Adicionar ao carrinho</button>
-</div>
+    <div
+      *ngFor="let product of products"
+      class="product-card"
+      (click)="goToProductDetail(product.id)"
+    >
+      <img
+        [src]="product.image"
+        alt="{{ product.name }}"
+        class="product-image"
+      />
+      <h3>{{ product.name }}</h3>
+      <p>Preço: R$ {{ product.price }}</p>
+
+      <p class="low-stock-warning" *ngIf="product.lowStock">
+        ⚠️ Estoque baixo!
+      </p>
+
+      <button
+        (click)="addToCart(product); $event.stopPropagation()"
+        [disabled]="!product.available"
+      >
+        Adicionar ao carrinho
+      </button>
+    </div>
   </div>
   <div class="actions">
-    <button routerLink="/produtos" class="see-more">Ver todos os produtos</button>
+    <button routerLink="/produtos" class="see-more">
+      Ver todos os produtos
+    </button>
   </div>
 </section>
