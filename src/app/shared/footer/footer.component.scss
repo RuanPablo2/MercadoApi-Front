@@ -1,25 +1,39 @@
 .footer {
-  background-color: #222;
-  color: #fff;
-  padding: 20px 0;
+  background-color: var(--dark-purple);
+  color: var(--light-text);
+  padding: 1.5rem 1rem;
   position: relative;
   bottom: 0;
   width: 100%;
   text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 
-  .footer-info {
-    margin-bottom: 10px;
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    &:last-of-type {
+      margin-bottom: 1rem;
+    }
   }
 
   .footer-links {
     a {
-      color: #fff;
+      color: var(--accent-yellow);
       text-decoration: none;
-      margin: 0 10px;
-    }
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
 
-    a:hover {
-      text-decoration: underline;
+      &:hover {
+        text-decoration: underline;
+        color: var(--lighter-accent-yellow), 10%;
+      }
     }
   }
 }

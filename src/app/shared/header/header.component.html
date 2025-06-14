@@ -2,7 +2,13 @@
 <header class="header-simple" *ngIf="showSimpleHeader">
   <div class="container center">
     <div class="logo">
-      <a routerLink="/">🌟 Mercado Energia Positiva</a>
+      <a routerLink="/" class="logo-link">
+        <img
+          src="../../../assets/logo-mercado-energia-positiva.png"
+          alt="Mercado Energia Positiva"
+          class="logo-img"
+        />
+      </a>
     </div>
   </div>
 </header>
@@ -11,7 +17,13 @@
 <header class="header" *ngIf="!showSimpleHeader">
   <div class="container">
     <div class="logo">
-      <a routerLink="/">🌟 Mercado Energia Positiva</a>
+      <a routerLink="/" class="logo-link">
+        <img
+          src="../../../assets/logo-mercado-energia-positiva.png"
+          alt="Mercado Energia Positiva"
+          class="logo-img"
+        />
+      </a>
     </div>
 
     <nav class="nav">
@@ -23,7 +35,9 @@
 
     <div class="actions">
       <a routerLink="/cart" class="cart-btn" title="Carrinho">🛒</a>
-      <a routerLink="/auth" class="login-btn" *ngIf="!isAuthenticated">Entrar</a>
+      <a routerLink="/auth" class="login-btn" *ngIf="!isAuthenticated"
+        >Entrar</a
+      >
       <button *ngIf="isAuthenticated" (click)="logout()">Sair</button>
     </div>
   </div>

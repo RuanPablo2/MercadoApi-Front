@@ -32,7 +32,13 @@
       <h3>{{ product.name }}</h3>
       <p>Preço: R$ {{ product.price }}</p>
 
-      <p class="low-stock-warning" *ngIf="product.lowStock">
+      <p class="low-stock-warning" *ngIf="!product.available">
+        ❌ Produto indisponível
+      </p>
+      <p
+        class="low-stock-warning"
+        *ngIf="product.lowStock && product.available"
+      >
         ⚠️ Estoque baixo!
       </p>
 

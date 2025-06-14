@@ -1,50 +1,85 @@
-.checkout {
-    padding: 2rem;
-  
-    .checkout-grid {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-  
-      .left {
-        flex: 2;
-      }
-  
-      .right {
-        flex: 1;
-      }
-  
-      .box {
-        background: #f9f9f9;
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1.5rem;
-  
-        h3 {
-          margin-bottom: 1rem;
-          color: #4b0082;
-        }
-  
-        input[type="text"],
-        input[type="number"],
-        input[type="email"] {
-          width: 100%;
-          padding: 0.5rem;
-          margin-bottom: 0.8rem;
-          border: 1px solid #ccc;
-          border-radius: 0.4rem;
-        }
-  
-        label {
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-  
-        button.btn {
-          width: 100%;
-          padding: 1rem;
-          font-size: 1rem;
-        }
-      }
-    }
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+:root {
+  --primary-purple: #6f2dbd;
+  --dark-purple: #4b0082;
+  --accent-yellow: #facc15;
+  --darker-yellow: #e0b000;
+  --light-gray: #f9f9f9;
+  --medium-gray: #eee;
+  --darker-medium-gray: #d8d8d8;
+  --dark-gray-text: #222;
+  --light-text: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+button.primary {
+  background-color: var(--primary-purple);
+  color: var(--light-text);
+  &:hover {
+    background-color: var(--dark-purple);
   }
+}
+
+button.outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-purple);
+  color: var(--primary-purple);
+  &:hover {
+    background-color: var(--primary-purple);
+    color: var(--light-text);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.box {
+  background: var(--light-gray);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.low-stock-warning {
+  color: #d97706;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.snackbar-error {
+  background-color: #f44336;
+  color: #fff;
+}

@@ -1,19 +1,25 @@
 .orders-page {
-  padding: 2rem;
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2.5rem;
 
     h2 {
-      color: #1a1a2e;
+      color: var(--dark-purple);
+      font-size: 2.2rem;
     }
 
     .avatar img {
-      width: 32px;
-      height: 32px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
+      border: 3px solid var(--accent-yellow);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -21,65 +27,110 @@
     margin-top: 2rem;
 
     .order-card {
-      background: #f4fffa;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
+      background: var(--light-text);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
 
       .info {
         display: flex;
         flex-direction: column;
-        gap: 0.25rem;
+        gap: 0.5rem;
+
+        strong {
+          font-size: 1.2rem;
+          color: var(--dark-purple);
+        }
+        span {
+          font-size: 1.1rem;
+          color: #555;
+        }
+        small {
+          font-size: 0.85rem;
+          color: #777;
+        }
       }
 
       .status {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 0.5rem;
+        gap: 0.75rem;
 
         .badge {
-          padding: 0.25rem 0.5rem;
-          border-radius: 12px;
-          font-size: 0.75rem;
+          padding: 0.5rem 1rem;
+          border-radius: 1.2rem;
+          font-size: 0.85rem;
           font-weight: bold;
-          color: #000;
-
-          &.PENDING {
-            background: #ffcd00;
-            color: #000;
-          }
-
-          &.PAID {
-            background: #6a0dad;
-          }
-
-          &.OUT_FOR_DELIVERY {
-            background: #007bff;
-          }
-
-          &.CANCELED {
-            background: red;
-          }
+          color: var(--light-text);
+          min-width: 120px;
+          text-align: center;
+          text-transform: uppercase;
 
           &.CART {
-            background: gray;
+            background: var(--medium-gray);
+            color: #666;
+          }
+          &.PENDING {
+            background: var(--accent-yellow);
+            color: var(--dark-purple);
+          }
+          &.PAID {
+            background: #28a745;
+          }
+          &.PROCESSING {
+            background: #17a2b8;
+          }
+          &.OUT_FOR_DELIVERY {
+            background: var(--primary-purple);
+            color: var(--light-text);
+          }
+          &.COMPLETED {
+            background: #007bff;
+          }
+          &.CANCELLED {
+            background: #dc3545;
           }
         }
 
         button {
           background: none;
-          border: 1px solid #6a0dad;
-          color: #6a0dad;
-          padding: 0.25rem 0.75rem;
-          border-radius: 8px;
-          font-size: 0.8rem;
+          border: 2px solid var(--primary-purple);
+          color: var(--primary-purple);
+          padding: 0.5rem 1rem;
+          border-radius: 0.75rem;
+          font-size: 0.9rem;
+          font-weight: bold;
           cursor: pointer;
+          transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+          &:hover {
+            background-color: var(--primary-purple);
+            color: var(--light-text);
+          }
         }
       }
     }
+  }
+
+  .noOrders {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #888;
+    padding: 3rem;
+    background-color: var(--light-gray);
+    border: 2px dashed var(--primary-purple);
+    border-radius: 1rem;
+    margin-top: 2rem;
   }
 }

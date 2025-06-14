@@ -1,83 +1,121 @@
 .header {
-    background-color: #4b0082;
-    color: white;
-    padding: 1rem 0;
-  
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-  
-    .logo a {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ffd700;
+  background-color: var(--dark-purple);
+  color: var(--light-text);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .logo-img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      color: var(--light-text);
       text-decoration: none;
-    }
-  
-    .nav {
-      display: flex;
-      gap: 1rem;
-  
-      a {
-        color: white;
-        text-decoration: none;
-  
-        &:hover {
-          color: #ffd700;
-        }
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+
+      &:hover {
+        color: var(--darker-yellow); /* Amarelo no hover */
       }
-    }
-  
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-  
-      .cart-btn,
-      .login-btn {
-        color: white;
-        text-decoration: none;
-  
-        &:hover {
-          color: #ffd700;
-        }
+
+      // Underline animado no hover
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent-yellow);
+        transition: width 0.3s ease-in-out;
       }
-  
-      button {
-        background: none;
-        border: 1px solid white;
-        color: white;
-        padding: 0.25rem 0.5rem;
-        cursor: pointer;
-  
-        &:hover {
-          background-color: #ffd700;
-          color: #4b0082;
-        }
+
+      &:hover::after {
+        width: 100%;
       }
     }
   }
 
-  .header-simple {
-    background-color: #4b0082;
-    color: white;
-    padding: 2rem 0;
-    text-align: center;
-  
-    .container.center {
-      justify-content: center;
-    }
-  
-    .logo a {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #ffd700;
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .cart-btn {
+      font-size: 1.5rem;
+      color: var(--darker-yellow);
       text-decoration: none;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .login-btn {
+      background-color: var(--darker-yellow);
+      color: var(--dark-purple);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        background-color: var(--darker-yellow);
+      }
+    }
+
+    button {
+      background: var(--dark-purple);
+      border: 1px solid var(--darker-yellow);
+      color: var(--darker-yellow);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background-color: var(--darker-yellow);
+        color: var(--dark-purple);
+      }
     }
   }
+}
+
+.header-simple {
+  background-color: var(--dark-purple);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+
+  .container.center {
+    justify-content: center;
+  }
+
+  .logo a {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--darker-yellow);
+    text-decoration: none;
+  }
+}
