@@ -54,10 +54,9 @@ export class AuthComponent {
     this.activeTab = tab;
   }
 
-  onLogin() {
+    onLogin() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
+      this.authService.login(this.loginForm.value).subscribe({
         next: () => {
           this.router.navigateByUrl(this.redirectUrl);
         },

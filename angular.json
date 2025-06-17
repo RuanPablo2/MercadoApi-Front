@@ -63,15 +63,13 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "proxyConfig": "src/proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "buildTarget": "MercadoAPI-Front:build:production"
             },
             "development": {
-              "buildTarget": "MercadoAPI-Front:build:development"
+              "buildTarget": "MercadoAPI-Front:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

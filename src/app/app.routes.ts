@@ -26,25 +26,27 @@ import { AdminOrdersComponent } from './pages/admin/orders/orders.component';
 import { AdminOrderDetailsComponent } from './pages/admin/order-details/order-details.component';
 
 export const routes: Routes = [
+  // Rotas Públicas
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'register', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
 
-  // Usuário logado
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  { path: 'orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'cart', component: CartComponent },
+  // Rotas do Cliente (requerem autenticação)
+  { path: 'my-orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'my-orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
 
-  // Admin
+  // Rotas de Administração (requerem autenticação e permissão de admin)
   {
     path: 'admin',
-    canActivate: [AdminGuard],
+    canActivate: [AuthGuard, AdminGuard],
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'products/create', component: ProductsCreateComponent },
@@ -54,8 +56,5 @@ export const routes: Routes = [
     ]
   },
 
-  // Auth
-  { path: 'checkout/:id', component: CheckoutComponent, canActivate: [AuthGuard] },
-
-  { path: '**', redirectTo: '' } // fallback
+  { path: '**', redirectTo: '' }
 ];

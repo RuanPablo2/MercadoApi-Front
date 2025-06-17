@@ -1,24 +1,47 @@
 <div class="cart container">
-    <h2>Meu Carrinho</h2>
-  
-    <div class="cart-items">
-      <div *ngFor="let item of cart.items" class="cart-item">
-        <!-- <img [src]="item.imageUrl" /> -->
-        <div>
-          <strong>{{ item.productName }}</strong><br />
+  <h2>Meu Carrinho</h2>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Carregando carrinho...</p>
+  </div>
+
+  <div *ngIf="!isLoading && !cart" class="empty-cart-state">
+    <h3>Ops! Não foi possível carregar seu carrinho.</h3>
+    <p>Isso pode acontecer se você não estiver logado.</p>
+    <button class="btn primary" routerLink="/auth">Fazer Login</button>
+  </div>
+
+  <ng-container *ngIf="!isLoading && cart">
+    <div *ngIf="cart.items && cart.items.length > 0; else emptyCartTemplate">
+      <div class="cart-items">
+        <div *ngFor="let item of cart.items" class="cart-item">
+          <div>
+            <strong>{{ item.productName }}</strong>
+          </div>
+          <div class="quantity-control">
+            <button (click)="decreaseQty(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQty(item)">+</button>
+          </div>
+          <span class="price">R$ {{ item.total | number : "1.2-2" }}</span>
+          <button (click)="removeItem(item)" class="remove">🗑</button>
         </div>
-        <div class="quantity-control">
-          <button (click)="decreaseQty(item)">-</button>
-          <span>{{ item.quantity }}</span>
-          <button (click)="increaseQty(item)">+</button>
-        </div>
-        <span class="price">R$ {{ item.total| number:'1.2-2' }}</span>
-        <button (click)="removeItem(item)" class="remove">🗑</button>
+      </div>
+
+      <div class="cart-summary">
+        <h4>Total: R$ {{ cart.total | number : "1.2-2" }}</h4>
+        <button class="btn primary" (click)="goToCheckout()">
+          🛍️ Finalizar Compra
+        </button>
       </div>
     </div>
-  
-    <div class="cart-summary">
-      <h4>Total: R$ {{ cart.total | number:'1.2-2' }}</h4>
-      <button class="btn primary" (click)="goToCheckout()">🛍️ Finalizar Compra</button>
+  </ng-container>
+
+  <ng-template #emptyCartTemplate>
+    <div class="empty-cart-state">
+      <h3>Seu carrinho está vazio!</h3>
+      <p>Adicione produtos para vê-los aqui.</p>
+      <button class="btn primary" routerLink="/products">Ver Produtos</button>
     </div>
-  </div>
+  </ng-template>
+</div>

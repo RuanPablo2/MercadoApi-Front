@@ -3,6 +3,7 @@ import { CartService } from '../../services/cart.service';
 import { CartResponse, CartItem } from '../../dto/response/cart-response';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,9 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class CartComponent implements OnInit {
-  cart!: CartResponse;
+  cart: CartResponse | null = null;
+  isLoading = true;
+  private subscriptions = new Subscription();
 
   constructor(private cartService: CartService, private router: Router) {}
 
@@ -21,9 +24,20 @@ export class CartComponent implements OnInit {
   }
 
   loadCart(): void {
-    this.cartService.getCart().subscribe((data: CartResponse) => {
-      this.cart = data;
-    });
+    this.isLoading = true;
+    this.subscriptions.add(
+      this.cartService.getCart().subscribe({
+        next: (data: CartResponse) => {
+          this.cart = data;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Erro ao carregar carrinho:", err);
+          this.cart = null;
+          this.isLoading = false;
+        }
+      })
+    );
   }
 
   increaseQty(item: CartItem): void {
@@ -57,5 +71,9 @@ export class CartComponent implements OnInit {
 
   goToCheckout(): void {
     this.router.navigate(['/checkout']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
