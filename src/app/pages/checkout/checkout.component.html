@@ -20,10 +20,20 @@
 
       <section class="box">
         <h3>Endereço de Entrega</h3>
-        <input formControlName="fullName" placeholder="Nome Completo" />
-        <input formControlName="cep" placeholder="CEP" />
-        <input formControlName="number" placeholder="Número" />
-        <input formControlName="address" placeholder="Endereço" />
+
+        <div formGroupName="shippingAddress">
+          <input formControlName="fullName" placeholder="Nome Completo" />
+          <input formControlName="cep" placeholder="CEP" />
+          <input formControlName="street" placeholder="Rua" />
+          <input formControlName="number" placeholder="Número" />
+          <input formControlName="city" placeholder="Cidade" />
+          <input formControlName="state" placeholder="Estado" />
+          <input formControlName="neighborhood" placeholder="Bairro" />
+          <input
+            formControlName="complement"
+            placeholder="Complemento (Opcional)"
+          />
+        </div>
       </section>
 
       <section class="box">
